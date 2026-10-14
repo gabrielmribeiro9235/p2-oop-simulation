@@ -3,6 +3,7 @@ package br.edu.ifsp.election;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class Partido {
     private final int numero;
@@ -71,5 +72,25 @@ public class Partido {
             case DEPUTADO_FEDERAL -> candidatosDeputadoFederal.get(numCandidato);
             case DEPUTADO_ESTADUAL -> candidatosDeputadoEstadual.get(numCandidato);
         };
+    }
+
+    public Stream<Candidato> senado() {
+        return candidatosSenador.values().stream();
+    }
+
+    public Stream<Candidato> governo() {
+        return governador.values().stream();
+    }
+
+    public Stream<Candidato> presidencia() {
+        return presidente.values().stream();
+    }
+
+    public Stream<Candidato> deputadosEstaduais() {
+        return candidatosDeputadoEstadual.values().stream();
+    }
+
+    public Stream<Candidato> deputadosFederais() {
+        return candidatosDeputadoFederal.values().stream();
     }
 }
