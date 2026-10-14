@@ -140,6 +140,8 @@ public class UrnaImpl implements Urna {
         partidos = new HashMap<>();
         List<String> candidatos = Utilitario.carregarCandidatos();
 
+        candidatos = candidatos.subList(1, candidatos.size());
+
         for (String candidato : candidatos) {
             String[] informacoes = candidato.split(";");
             String nomeCompleto = informacoes[0];
@@ -472,7 +474,7 @@ public class UrnaImpl implements Urna {
                 }
             }
         } while (corrige);
-        
+
         scanner.close();
     }
 
