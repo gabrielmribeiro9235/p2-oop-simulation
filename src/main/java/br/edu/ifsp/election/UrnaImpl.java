@@ -3,6 +3,7 @@ package br.edu.ifsp.election;
 import br.edu.ifsp.Utilitario;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class UrnaImpl implements Urna {
     private final int[] nulos;
@@ -26,110 +27,39 @@ public class UrnaImpl implements Urna {
     }
 
     private void imprimirCandidatos() {
-        System.out.println("---------------------- CANDIDATOS A DEPUTADO ESTADUAL ---------------------");
+        imprimirCandidatosCargo(Cargo.DEPUTADO_FEDERAL);
+        imprimirCandidatosCargo(Cargo.DEPUTADO_ESTADUAL);
+        imprimirCandidatosCargo(Cargo.SENADOR);
+        imprimirCandidatosCargo(Cargo.GOVERNADOR);
+        imprimirCandidatosCargo(Cargo.PRESIDENTE);
+    }
+
+    private void imprimirCandidatosCargo(Cargo cargo) {
+        System.out.printf("---------------------- CANDIDATOS A %s ---------------------\n", cargo.toString().replace("_", " "));
+
         System.out.println(
-            Utilitario.textoFixo("Nome", 50) +
-            Utilitario.textoFixo("Cargo", 25) +
-            Utilitario.textoFixo("Número", 10) +
-            "Partido"
+                Utilitario.textoFixo("Nome", 50) +
+                Utilitario.textoFixo("Cargo", 25) +
+                Utilitario.textoFixo("Número", 10) +
+                "Partido"
         );
 
-        partidos.values()
-            .forEach(p ->
-                p.deputadosEstaduais()
-                    .forEach(de ->
-                        System.out.println(
-                                Utilitario.textoFixo(de.getNomeUrna(), 50) +
-                                Utilitario.textoFixo(de.getCargo().toString(), 25) +
-                                Utilitario.textoFixo(String.valueOf(de.getNumero()), 10) +
-                                de.getPartido().getNome()
-                        )
-                    )
-            );
+        List<Candidato> candidatos = switch (cargo) {
+            case DEPUTADO_FEDERAL -> partidos.values().stream().flatMap(Partido::deputadosFederais).toList();
+            case DEPUTADO_ESTADUAL -> partidos.values().stream().flatMap(Partido::deputadosEstaduais).toList();
+            case SENADOR -> partidos.values().stream().flatMap(Partido::senado).toList();
+            case GOVERNADOR -> partidos.values().stream().flatMap(Partido::governo).toList();
+            case PRESIDENTE -> partidos.values().stream().flatMap(Partido::presidencia).toList();
+        };
 
-        System.out.println("---------------------- CANDIDATOS A DEPUTADO FEDERAL ---------------------");
-        System.out.println(
-            Utilitario.textoFixo("Nome", 50) +
-            Utilitario.textoFixo("Cargo", 25) +
-            Utilitario.textoFixo("Número", 10) +
-            "Partido"
+        candidatos.forEach(c ->
+                System.out.println(
+                        Utilitario.textoFixo(c.getNomeUrna(), 50) +
+                        Utilitario.textoFixo(c.getCargo().toString().replace("_", " "), 25) +
+                        Utilitario.textoFixo(String.valueOf(c.getNumero()), 10) +
+                        c.getPartido().getNome()
+                )
         );
-
-        partidos.values()
-            .forEach(p ->
-                p.deputadosFederais()
-                    .forEach(df ->
-                        System.out.println(
-                                Utilitario.textoFixo(df.getNomeUrna(), 50) +
-                                Utilitario.textoFixo(df.getCargo().toString(), 25) +
-                                Utilitario.textoFixo(String.valueOf(df.getNumero()), 10) +
-                                df.getPartido().getNome()
-                        )
-                    )
-            );
-
-        System.out.println("---------------------- CANDIDATOS A SENADOR ---------------------");
-        System.out.println(
-            Utilitario.textoFixo("Nome", 50) +
-            Utilitario.textoFixo("Cargo", 25) +
-            Utilitario.textoFixo("Número", 10) +
-            "Partido"
-        );
-
-        partidos.values()
-            .forEach(p ->
-                p.senado()
-                    .forEach(s ->
-                        System.out.println(
-                                Utilitario.textoFixo(s.getNomeUrna(), 50) +
-                                Utilitario.textoFixo(s.getCargo().toString(), 25) +
-                                Utilitario.textoFixo(String.valueOf(s.getNumero()), 10) +
-                                s.getPartido().getNome()
-                        )
-                    )
-            );
-
-        System.out.println("---------------------- CANDIDATOS A GOVERNADOR ---------------------");
-        System.out.println(
-            Utilitario.textoFixo("Nome", 50) +
-            Utilitario.textoFixo("Cargo", 25) +
-            Utilitario.textoFixo("Número", 10) +
-            "Partido"
-        );
-
-        partidos.values()
-            .forEach(p ->
-                p.governo()
-                    .forEach(g ->
-                        System.out.println(
-                                Utilitario.textoFixo(g.getNomeUrna(), 50) +
-                                Utilitario.textoFixo(g.getCargo().toString(), 25) +
-                                Utilitario.textoFixo(String.valueOf(g.getNumero()), 10) +
-                                g.getPartido().getNome()
-                        )
-                    )
-            );
-
-        System.out.println("---------------------- CANDIDATOS A PRESIDENTE ---------------------");
-        System.out.println(
-            Utilitario.textoFixo("Nome", 50) +
-            Utilitario.textoFixo("Cargo", 25) +
-            Utilitario.textoFixo("Número", 10) +
-            "Partido"
-        );
-
-        partidos.values()
-            .forEach(p ->
-                p.presidencia()
-                    .forEach(pr ->
-                        System.out.println(
-                                Utilitario.textoFixo(pr.getNomeUrna(), 50) +
-                                Utilitario.textoFixo(pr.getCargo().toString(), 25) +
-                                Utilitario.textoFixo(String.valueOf(pr.getNumero()), 10) +
-                                pr.getPartido().getNome()
-                        )
-                    )
-            );
     }
 
     @Override
