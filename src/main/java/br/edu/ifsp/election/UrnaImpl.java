@@ -3,7 +3,6 @@ package br.edu.ifsp.election;
 import br.edu.ifsp.Utilitario;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class UrnaImpl implements Urna {
     private final int[] nulos;
