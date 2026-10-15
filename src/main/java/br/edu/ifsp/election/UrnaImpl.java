@@ -2,10 +2,7 @@ package br.edu.ifsp.election;
 
 import br.edu.ifsp.Utilitario;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class UrnaImpl implements Urna {
     private final int[] nulos;
@@ -176,10 +173,17 @@ public class UrnaImpl implements Urna {
 
     @Override
     public void votar() {
+        votarCargo(Cargo.DEPUTADO_FEDERAL);
+        votarCargo(Cargo.DEPUTADO_ESTADUAL);
+        votarCargo(Cargo.SENADOR);
+        votarCargo(Cargo.GOVERNADOR);
+        votarCargo(Cargo.PRESIDENTE);
+    }
+
+    private void votarCargo(Cargo cargo) {
         Scanner scanner = new Scanner(System.in);
 
         boolean corrige;
-
         do {
             Candidato candidato = null;
             boolean branco = false;
@@ -189,7 +193,14 @@ public class UrnaImpl implements Urna {
             boolean isNumber;
             do {
                 isNumber = true;
-                System.out.print("Deputado Federal [4 números | BRANCO]: ");
+
+                switch (cargo) {
+                    case DEPUTADO_FEDERAL -> System.out.print("Deputado Federal [4 números | BRANCO]: ");
+                    case DEPUTADO_ESTADUAL -> System.out.print("Deputado Estadual [5 números | BRANCO]: ");
+                    case SENADOR -> System.out.print("Senador [3 números | BRANCO]: ");
+                    case GOVERNADOR -> System.out.print("Governador [2 números | BRANCO]: ");
+                    case PRESIDENTE -> System.out.print("Presidente [2 números | BRANCO]: ");
+                }
 
                 opcao = scanner.nextLine();
 
@@ -209,7 +220,7 @@ public class UrnaImpl implements Urna {
                     System.out.println("VOTO NULO");
                     nulo = true;
                 } else {
-                    candidato = partido.getCandidato(Cargo.DEPUTADO_FEDERAL, Integer.parseInt(opcao));
+                    candidato = partido.getCandidato(cargo, Integer.parseInt(opcao));
 
                     if (candidato == null) {
                         System.out.println("VOTO NULO");
@@ -233,257 +244,9 @@ public class UrnaImpl implements Urna {
                 corrige = false;
 
                 if (branco) {
-                    brancos[0]++;
+                    brancos[cargo.ordinal()]++;
                 } else if (nulo) {
-                    nulos[0]++;
-                } else {
-                    candidato.receberVoto();
-                }
-            }
-        } while (corrige);
-
-        do {
-            Candidato candidato = null;
-            boolean branco = false;
-            boolean nulo = false;
-
-            String opcao;
-            boolean isNumber;
-            do {
-                isNumber = true;
-                System.out.print("Deputado Estadual [5 números | BRANCO]: ");
-
-                opcao = scanner.nextLine();
-
-                for (char c : opcao.toCharArray()) {
-                    if (!Character.isDigit(c)) isNumber = false;
-                }
-            } while (opcao.isBlank() || (!"BRANCO".equals(opcao) && !isNumber));
-
-            if ("BRANCO".equals(opcao)) {
-                System.out.println("VOTO EM BRANCO");
-                branco = true;
-            } else {
-                int numeroPartido = Integer.parseInt(opcao.length() > 2 ? opcao.substring(0, 2) : opcao);
-                Partido partido = partidos.get(numeroPartido);
-
-                if (partido == null) {
-                    System.out.println("VOTO NULO");
-                    nulo = true;
-                } else {
-                    candidato = partido.getCandidato(Cargo.DEPUTADO_ESTADUAL, Integer.parseInt(opcao));
-
-                    if (candidato == null) {
-                        System.out.println("VOTO NULO");
-                        nulo = true;
-                    } else {
-                        System.out.printf("Nome: %s\t\tPartido: %s (%d)\n", candidato.getNomeUrna(), candidato.getPartido().getNome(), candidato.getPartido().getNumero());
-                    }
-                }
-            }
-
-            String confirma;
-            do {
-                System.out.print("[CORRIGE | CONFIRMA]: ");
-
-                confirma = scanner.nextLine();
-            } while (!"CORRIGE".equals(confirma) && !"CONFIRMA".equals(confirma));
-
-            if ("CORRIGE".equals(confirma)) {
-                corrige = true;
-            } else {
-                corrige = false;
-
-                if (branco) {
-                    brancos[1]++;
-                } else if (nulo) {
-                    nulos[1]++;
-                } else {
-                    candidato.receberVoto();
-                }
-            }
-        } while (corrige);
-
-        do {
-            Candidato candidato = null;
-            boolean branco = false;
-            boolean nulo = false;
-
-            String opcao;
-            boolean isNumber;
-            do {
-                isNumber = true;
-                System.out.print("Senador [3 números | BRANCO]: ");
-
-                opcao = scanner.nextLine();
-
-                for (char c : opcao.toCharArray()) {
-                    if (!Character.isDigit(c)) isNumber = false;
-                }
-            } while (opcao.isBlank() || (!"BRANCO".equals(opcao) && !isNumber));
-
-            if ("BRANCO".equals(opcao)) {
-                System.out.println("VOTO EM BRANCO");
-                branco = true;
-            } else {
-                int numeroPartido = Integer.parseInt(opcao.length() > 2 ? opcao.substring(0, 2) : opcao);
-                Partido partido = partidos.get(numeroPartido);
-
-                if (partido == null) {
-                    System.out.println("VOTO NULO");
-                    nulo = true;
-                } else {
-                    candidato = partido.getCandidato(Cargo.SENADOR, Integer.parseInt(opcao));
-
-                    if (candidato == null) {
-                        System.out.println("VOTO NULO");
-                        nulo = true;
-                    } else {
-                        System.out.printf("Nome: %s\t\tPartido: %s (%d)\n", candidato.getNomeUrna(), candidato.getPartido().getNome(), candidato.getPartido().getNumero());
-                    }
-                }
-            }
-
-            String confirma;
-            do {
-                System.out.print("[CORRIGE | CONFIRMA]: ");
-
-                confirma = scanner.nextLine();
-            } while (!"CORRIGE".equals(confirma) && !"CONFIRMA".equals(confirma));
-
-            if ("CORRIGE".equals(confirma)) {
-                corrige = true;
-            } else {
-                corrige = false;
-
-                if (branco) {
-                    brancos[2]++;
-                } else if (nulo) {
-                    nulos[2]++;
-                } else {
-                    candidato.receberVoto();
-                }
-            }
-        } while (corrige);
-
-        do {
-            Candidato candidato = null;
-            boolean branco = false;
-            boolean nulo = false;
-
-            String opcao;
-            boolean isNumber;
-            do {
-                isNumber = true;
-                System.out.print("Governador [2 números | BRANCO]: ");
-
-                opcao = scanner.nextLine();
-
-                for (char c : opcao.toCharArray()) {
-                    if (!Character.isDigit(c)) isNumber = false;
-                }
-            } while (opcao.isBlank() || (!"BRANCO".equals(opcao) && !isNumber));
-
-            if ("BRANCO".equals(opcao)) {
-                System.out.println("VOTO EM BRANCO");
-                branco = true;
-            } else {
-                int numeroPartido = Integer.parseInt(opcao.length() > 2 ? opcao.substring(0, 2) : opcao);
-                Partido partido = partidos.get(numeroPartido);
-
-                if (partido == null) {
-                    System.out.println("VOTO NULO");
-                    nulo = true;
-                } else {
-                    candidato = partido.getCandidato(Cargo.GOVERNADOR, Integer.parseInt(opcao));
-
-                    if (candidato == null) {
-                        System.out.println("VOTO NULO");
-                        nulo = true;
-                    } else {
-                        System.out.printf("Nome: %s\t\tPartido: %s (%d)\n", candidato.getNomeUrna(), candidato.getPartido().getNome(), candidato.getPartido().getNumero());
-                    }
-                }
-            }
-
-            String confirma;
-            do {
-                System.out.print("[CORRIGE | CONFIRMA]: ");
-
-                confirma = scanner.nextLine();
-            } while (!"CORRIGE".equals(confirma) && !"CONFIRMA".equals(confirma));
-
-            if ("CORRIGE".equals(confirma)) {
-                corrige = true;
-            } else {
-                corrige = false;
-
-                if (branco) {
-                    brancos[3]++;
-                } else if (nulo) {
-                    nulos[3]++;
-                } else {
-                    candidato.receberVoto();
-                }
-            }
-        } while (corrige);
-
-        do {
-            Candidato candidato = null;
-            boolean branco = false;
-            boolean nulo = false;
-
-            String opcao;
-            boolean isNumber;
-            do {
-                isNumber = true;
-                System.out.print("Presidente [2 números | BRANCO]: ");
-
-                opcao = scanner.nextLine();
-
-                for (char c : opcao.toCharArray()) {
-                    if (!Character.isDigit(c)) isNumber = false;
-                }
-            } while (opcao.isBlank() || (!"BRANCO".equals(opcao) && !isNumber));
-
-            if ("BRANCO".equals(opcao)) {
-                System.out.println("VOTO EM BRANCO");
-                branco = true;
-            } else {
-                int numeroPartido = Integer.parseInt(opcao.length() > 2 ? opcao.substring(0, 2) : opcao);
-                Partido partido = partidos.get(numeroPartido);
-
-                if (partido == null) {
-                    System.out.println("VOTO NULO");
-                    nulo = true;
-                } else {
-                    candidato = partido.getCandidato(Cargo.PRESIDENTE, Integer.parseInt(opcao));
-
-                    if (candidato == null) {
-                        System.out.println("VOTO NULO");
-                        nulo = true;
-                    } else {
-                        System.out.printf("Nome: %s\t\tPartido: %s (%d)\n", candidato.getNomeUrna(), candidato.getPartido().getNome(), candidato.getPartido().getNumero());
-                    }
-                }
-            }
-
-            String confirma;
-            do {
-                System.out.print("[CORRIGE | CONFIRMA]: ");
-
-                confirma = scanner.nextLine();
-            } while (!"CORRIGE".equals(confirma) && !"CONFIRMA".equals(confirma));
-
-            if ("CORRIGE".equals(confirma)) {
-                corrige = true;
-            } else {
-                corrige = false;
-
-                if (branco) {
-                    brancos[4]++;
-                } else if (nulo) {
-                    nulos[4]++;
+                    nulos[cargo.ordinal()]++;
                 } else {
                     candidato.receberVoto();
                 }
