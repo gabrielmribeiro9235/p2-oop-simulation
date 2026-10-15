@@ -196,7 +196,7 @@ public class UrnaImpl implements Urna {
                 for (char c : opcao.toCharArray()) {
                     if (!Character.isDigit(c)) isNumber = false;
                 }
-            } while (!"BRANCO".equals(opcao) && !isNumber);
+            } while (opcao.isBlank() || (!"BRANCO".equals(opcao) && !isNumber));
 
             if ("BRANCO".equals(opcao)) {
                 System.out.println("VOTO EM BRANCO");
@@ -258,7 +258,7 @@ public class UrnaImpl implements Urna {
                 for (char c : opcao.toCharArray()) {
                     if (!Character.isDigit(c)) isNumber = false;
                 }
-            } while (!"BRANCO".equals(opcao) && !isNumber);
+            } while (opcao.isBlank() || (!"BRANCO".equals(opcao) && !isNumber));
 
             if ("BRANCO".equals(opcao)) {
                 System.out.println("VOTO EM BRANCO");
@@ -320,7 +320,7 @@ public class UrnaImpl implements Urna {
                 for (char c : opcao.toCharArray()) {
                     if (!Character.isDigit(c)) isNumber = false;
                 }
-            } while (!"BRANCO".equals(opcao) && !isNumber);
+            } while (opcao.isBlank() || (!"BRANCO".equals(opcao) && !isNumber));
 
             if ("BRANCO".equals(opcao)) {
                 System.out.println("VOTO EM BRANCO");
@@ -382,7 +382,7 @@ public class UrnaImpl implements Urna {
                 for (char c : opcao.toCharArray()) {
                     if (!Character.isDigit(c)) isNumber = false;
                 }
-            } while (!"BRANCO".equals(opcao) && !isNumber);
+            } while (opcao.isBlank() || (!"BRANCO".equals(opcao) && !isNumber));
 
             if ("BRANCO".equals(opcao)) {
                 System.out.println("VOTO EM BRANCO");
@@ -444,7 +444,7 @@ public class UrnaImpl implements Urna {
                 for (char c : opcao.toCharArray()) {
                     if (!Character.isDigit(c)) isNumber = false;
                 }
-            } while (!"BRANCO".equals(opcao) && !isNumber);
+            } while (opcao.isBlank() || (!"BRANCO".equals(opcao) && !isNumber));
 
             if ("BRANCO".equals(opcao)) {
                 System.out.println("VOTO EM BRANCO");
