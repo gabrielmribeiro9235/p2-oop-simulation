@@ -489,8 +489,6 @@ public class UrnaImpl implements Urna {
                 }
             }
         } while (corrige);
-
-        scanner.close();
     }
 
     @Override
