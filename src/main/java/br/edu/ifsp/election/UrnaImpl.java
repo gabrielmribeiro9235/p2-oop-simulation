@@ -185,11 +185,12 @@ public class UrnaImpl implements Urna {
             boolean branco = false;
             boolean nulo = false;
 
-            System.out.print("Deputado Federal [4 números | BRANCO]: ");
-
             String opcao;
-            boolean isNumber = true;
+            boolean isNumber;
             do {
+                isNumber = true;
+                System.out.print("Deputado Federal [4 números | BRANCO]: ");
+
                 opcao = scanner.nextLine();
 
                 for (char c : opcao.toCharArray()) {
@@ -221,6 +222,8 @@ public class UrnaImpl implements Urna {
 
             String confirma;
             do {
+                System.out.print("[CORRIGE | CONFIRMA]: ");
+
                 confirma = scanner.nextLine();
             } while (!"CORRIGE".equals(confirma) && !"CONFIRMA".equals(confirma));
 
@@ -244,11 +247,12 @@ public class UrnaImpl implements Urna {
             boolean branco = false;
             boolean nulo = false;
 
-            System.out.print("Deputado Estadual [5 números | BRANCO]: ");
-
             String opcao;
-            boolean isNumber = true;
+            boolean isNumber;
             do {
+                isNumber = true;
+                System.out.print("Deputado Estadual [5 números | BRANCO]: ");
+
                 opcao = scanner.nextLine();
 
                 for (char c : opcao.toCharArray()) {
@@ -280,6 +284,8 @@ public class UrnaImpl implements Urna {
 
             String confirma;
             do {
+                System.out.print("[CORRIGE | CONFIRMA]: ");
+
                 confirma = scanner.nextLine();
             } while (!"CORRIGE".equals(confirma) && !"CONFIRMA".equals(confirma));
 
@@ -303,11 +309,12 @@ public class UrnaImpl implements Urna {
             boolean branco = false;
             boolean nulo = false;
 
-            System.out.print("Senador [3 números | BRANCO]: ");
-
             String opcao;
-            boolean isNumber = true;
+            boolean isNumber;
             do {
+                isNumber = true;
+                System.out.print("Senador [3 números | BRANCO]: ");
+
                 opcao = scanner.nextLine();
 
                 for (char c : opcao.toCharArray()) {
@@ -339,6 +346,8 @@ public class UrnaImpl implements Urna {
 
             String confirma;
             do {
+                System.out.print("[CORRIGE | CONFIRMA]: ");
+
                 confirma = scanner.nextLine();
             } while (!"CORRIGE".equals(confirma) && !"CONFIRMA".equals(confirma));
 
@@ -362,11 +371,12 @@ public class UrnaImpl implements Urna {
             boolean branco = false;
             boolean nulo = false;
 
-            System.out.print("Governador [2 números | BRANCO]: ");
-
             String opcao;
-            boolean isNumber = true;
+            boolean isNumber;
             do {
+                isNumber = true;
+                System.out.print("Governador [2 números | BRANCO]: ");
+
                 opcao = scanner.nextLine();
 
                 for (char c : opcao.toCharArray()) {
@@ -398,6 +408,8 @@ public class UrnaImpl implements Urna {
 
             String confirma;
             do {
+                System.out.print("[CORRIGE | CONFIRMA]: ");
+
                 confirma = scanner.nextLine();
             } while (!"CORRIGE".equals(confirma) && !"CONFIRMA".equals(confirma));
 
@@ -421,11 +433,12 @@ public class UrnaImpl implements Urna {
             boolean branco = false;
             boolean nulo = false;
 
-            System.out.print("Presidente [2 números | BRANCO]: ");
-
             String opcao;
-            boolean isNumber = true;
+            boolean isNumber;
             do {
+                isNumber = true;
+                System.out.print("Presidente [2 números | BRANCO]: ");
+
                 opcao = scanner.nextLine();
 
                 for (char c : opcao.toCharArray()) {
@@ -457,6 +470,8 @@ public class UrnaImpl implements Urna {
 
             String confirma;
             do {
+                System.out.print("[CORRIGE | CONFIRMA]: ");
+
                 confirma = scanner.nextLine();
             } while (!"CORRIGE".equals(confirma) && !"CONFIRMA".equals(confirma));
 
