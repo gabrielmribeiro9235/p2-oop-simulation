@@ -97,7 +97,6 @@ public class UrnaImpl implements Urna {
         }
 
         imprimirPartidos();
-        System.out.println("--------------------------------------------------------------------");
         imprimirCandidatos();
     }
 
