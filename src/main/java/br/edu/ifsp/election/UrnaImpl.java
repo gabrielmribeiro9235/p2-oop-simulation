@@ -24,7 +24,7 @@ public class UrnaImpl implements Urna {
 
         partidos.values()
                 .forEach(p ->
-                    System.out.println(Utilitario.textoFixo(String.valueOf(p.getNome()), 20) + p.getNome())
+                    System.out.println(Utilitario.textoFixo(String.valueOf(p.getNumero()), 20) + p.getNome())
                 );
     }
 
