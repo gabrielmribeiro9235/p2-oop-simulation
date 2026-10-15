@@ -37,6 +37,6 @@ public final class Boletim {
                 Nulos: %d
                 Total apurado: %d
                 ---------------------------------------------------------------------------
-                """, nomeCargo, dadosCandidatos.toString(), votosNominais, brancos, nulos, totalApurado);
+                """, nomeCargo, dadosCandidatos, votosNominais, brancos, nulos, totalApurado);
     }
 }
