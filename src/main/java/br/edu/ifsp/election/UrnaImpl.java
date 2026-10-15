@@ -202,7 +202,7 @@ public class UrnaImpl implements Urna {
                 System.out.println("VOTO EM BRANCO");
                 branco = true;
             } else {
-                int numeroPartido = Integer.parseInt(opcao.substring(0, 2));
+                int numeroPartido = Integer.parseInt(opcao.length() > 2 ? opcao.substring(0, 2) : opcao);
                 Partido partido = partidos.get(numeroPartido);
 
                 if (partido == null) {
@@ -264,7 +264,7 @@ public class UrnaImpl implements Urna {
                 System.out.println("VOTO EM BRANCO");
                 branco = true;
             } else {
-                int numeroPartido = Integer.parseInt(opcao.substring(0, 2));
+                int numeroPartido = Integer.parseInt(opcao.length() > 2 ? opcao.substring(0, 2) : opcao);
                 Partido partido = partidos.get(numeroPartido);
 
                 if (partido == null) {
@@ -326,7 +326,7 @@ public class UrnaImpl implements Urna {
                 System.out.println("VOTO EM BRANCO");
                 branco = true;
             } else {
-                int numeroPartido = Integer.parseInt(opcao.substring(0, 2));
+                int numeroPartido = Integer.parseInt(opcao.length() > 2 ? opcao.substring(0, 2) : opcao);
                 Partido partido = partidos.get(numeroPartido);
 
                 if (partido == null) {
@@ -388,7 +388,7 @@ public class UrnaImpl implements Urna {
                 System.out.println("VOTO EM BRANCO");
                 branco = true;
             } else {
-                int numeroPartido = Integer.parseInt(opcao.substring(0, 2));
+                int numeroPartido = Integer.parseInt(opcao.length() > 2 ? opcao.substring(0, 2) : opcao);
                 Partido partido = partidos.get(numeroPartido);
 
                 if (partido == null) {
@@ -450,7 +450,7 @@ public class UrnaImpl implements Urna {
                 System.out.println("VOTO EM BRANCO");
                 branco = true;
             } else {
-                int numeroPartido = Integer.parseInt(opcao.substring(0, 2));
+                int numeroPartido = Integer.parseInt(opcao.length() > 2 ? opcao.substring(0, 2) : opcao);
                 Partido partido = partidos.get(numeroPartido);
 
                 if (partido == null) {
