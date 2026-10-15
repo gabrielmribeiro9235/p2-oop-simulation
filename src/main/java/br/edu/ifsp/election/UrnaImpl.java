@@ -178,7 +178,7 @@ public class UrnaImpl implements Urna {
     public void votar() {
         Scanner scanner = new Scanner(System.in);
 
-        boolean corrige = false;
+        boolean corrige;
 
         do {
             Candidato candidato = null;
