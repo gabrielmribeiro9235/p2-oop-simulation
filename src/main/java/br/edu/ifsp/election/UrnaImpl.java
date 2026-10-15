@@ -494,18 +494,18 @@ public class UrnaImpl implements Urna {
     @Override
     public void imprimir() {
         List<Candidato> deputadosFederais = partidos.values().stream().flatMap(Partido::deputadosFederais).toList();
-        Boletim.emitir("DEPUTADO FEDERAL", deputadosFederais, brancos[0], nulos[0]);
+        System.out.println(Boletim.emitir("DEPUTADO FEDERAL", deputadosFederais, brancos[0], nulos[0]));
 
         List<Candidato> deputadosEstaduais = partidos.values().stream().flatMap(Partido::deputadosEstaduais).toList();
-        Boletim.emitir("DEPUTADO ESTADUAL", deputadosEstaduais, brancos[1], nulos[1]);
+        System.out.println(Boletim.emitir("DEPUTADO ESTADUAL", deputadosEstaduais, brancos[1], nulos[1]));
 
         List<Candidato> senadores = partidos.values().stream().flatMap(Partido::senado).toList();
-        Boletim.emitir("SENADOR", senadores, brancos[2], nulos[2]);
+        System.out.println(Boletim.emitir("SENADOR", senadores, brancos[2], nulos[2]));
 
         List<Candidato> governadores = partidos.values().stream().flatMap(Partido::governo).toList();
-        Boletim.emitir("DEPUTADO FEDERAL", governadores, brancos[3], nulos[3]);
+        System.out.println(Boletim.emitir("GOVERNADOR", governadores, brancos[3], nulos[3]));
 
         List<Candidato> presidentes = partidos.values().stream().flatMap(Partido::presidencia).toList();
-        Boletim.emitir("PRESIDENTE", presidentes, brancos[4], nulos[4]);
+        System.out.println(Boletim.emitir("PRESIDENTE", presidentes, brancos[4], nulos[4]));
     }
 }
