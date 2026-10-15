@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class UrnaImpl implements Urna {
-    private int[] nulos;
-    private int[] brancos;
+    private final int[] nulos;
+    private final int[] brancos;
     private Map<Integer, Partido> partidos;
 
     public UrnaImpl() {
